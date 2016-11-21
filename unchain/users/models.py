@@ -37,10 +37,13 @@ class TwoPersonQueue(models.Model):
 		return "Two Person Queue"
 
 	def __init__(self, party):
-		list_of_parties.append(party)
+		self.list_of_parties.append(party)
 
-	def appendParties(party):
-		list_of_parties.append(party)
+	def appendParties(self, party):
+		self.list_of_parties.append(party)
+
+	def removeParty(self):
+		self.list_of_parties.pop(0)
 
 @python_2_unicode_compatible
 class FourPersonQueue(models.Model):
@@ -49,10 +52,13 @@ class FourPersonQueue(models.Model):
 		return "Four Person Queue"
 
 	def __init__(self, party):
-		list_of_parties.append(party)
+		self.list_of_parties.append(party)
 
-	def appendParties(party):
-		list_of_parties.append(party)
+	def appendParties(self, party):
+		self.list_of_parties.append(party)
+
+	def removeParty(self):
+		self.list_of_parties.pop(0)	
 
 @python_2_unicode_compatible
 class EightPersonQueue(models.Model):
@@ -61,10 +67,13 @@ class EightPersonQueue(models.Model):
 		return "Eight Person Queue"
 
 	def __init__(self, party):
-		list_of_parties.append(party)
+		self.list_of_parties.append(party)
 
-	def appendParties(party):
-		list_of_parties.append(party)
+	def appendParties(self, party):
+		self.list_of_parties.append(party)
+
+	def removeParty(self):
+		self.list_of_parties.pop(0)
 
 @python_2_unicode_compatible
 class TwoPersonTable(models.Model):
@@ -77,6 +86,9 @@ class TwoPersonTable(models.Model):
 		self.occupied = occupied
 		self.two_person_queue = two_person_queue
 
+	def setOccupied(self, occupied):
+		self.occupied = occupied
+
 @python_2_unicode_compatible
 class FourPersonTable(TwoPersonTable):
 	occupied = models.BooleanField(default=false)
@@ -88,6 +100,9 @@ class FourPersonTable(TwoPersonTable):
 		super(FourPersonTable, self).__init__(occupied, two_person_queue)
 		self.four_person_queue = four_person_queue
 
+	def setOccupied(self, occupied):
+		super(FourPersonTable, self).setOccupied(occupied)
+
 @python_2_unicode_compatible
 class EightPersonTable(FourPersonTable):
 	occupied = models.BooleanField(default=false)
@@ -98,3 +113,6 @@ class EightPersonTable(FourPersonTable):
 	def __init__(self, occupied, two_person_queue, four_person_queue, eight_person_queue):
 		super(EightPersonTable, self).__init__(occupied, two_person_queue, four_person_queue)
 		self.eight_person_queue = eight_person_queue
+
+	def setOccupied(self, occupied):
+		super(EightPersonTable, self).setOccupied(occupied)
