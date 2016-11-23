@@ -4,10 +4,12 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from Queues import models
 
 @python_2_unicode_compatible
 class TwoPersonTable(models.Model):
 	occupied = models.BooleanField(default=False)
+	two_person_queue = Queues
 	
 	def __str__(self):
 		return "Two Person Table"
@@ -19,9 +21,13 @@ class TwoPersonTable(models.Model):
 	def setOccupied(self, occupied):
 		self.occupied = occupied
 
+	def checkOccupied(self):
+		return self.occupied
+
 @python_2_unicode_compatible
 class FourPersonTable(TwoPersonTable):
 	occupied = models.BooleanField(default=False)
+	four_person_queue = Queues
 
 	def __str__(self):
 		return "Four Person Table"
@@ -33,9 +39,13 @@ class FourPersonTable(TwoPersonTable):
 	def setOccupied(self, occupied):
 		super(FourPersonTable, self).setOccupied(occupied)
 
+	def checkOccupied(self):
+		return self.occupied
+
 @python_2_unicode_compatible
 class EightPersonTable(FourPersonTable):
 	occupied = models.BooleanField(default=False)
+	eight_person_queue = Queues
 
 	def __str__(self):
 		return "Eight Person Table"
@@ -46,3 +56,6 @@ class EightPersonTable(FourPersonTable):
 
 	def setOccupied(self, occupied):
 		super(EightPersonTable, self).setOccupied(occupied)
+
+	def checkOccupied(self):
+		return self.occupied
