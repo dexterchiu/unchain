@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from django.utils import timezone
+
 
 # Create your models here.
 class Table(models.Model):
@@ -23,3 +25,10 @@ class Table(models.Model):
 class Party(models.Model):
     name = models.CharField(max_length=200)
     size = models.IntegerField()
+    arrival_time = models.DateTimeField(editable=False)
+
+    def save(self, *args, **kwargs):
+        '''overloading save to ensure arrival time is always now'''
+        if not self.id:
+            self.arrival_time = timezone.now()
+        return super(Party, self).save(*args, **kwargs)
