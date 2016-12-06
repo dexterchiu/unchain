@@ -26,6 +26,7 @@ class Party(models.Model):
     name = models.CharField(max_length=200)
     size = models.IntegerField()
     arrival_time = models.DateTimeField(editable=False)
+    seat = models.ForeignKey(Table, null=True, on_delete=models.SET_NULL)
 
     def save(self, *args, **kwargs):
         '''overloading save to ensure arrival time is always now'''
