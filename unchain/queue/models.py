@@ -20,9 +20,6 @@ class Table(models.Model):
     # might want to consider switching to a one-to-one relation instead
     occupant = models.ForeignKey('Party', null=True, on_delete=models.SET_NULL)
 
-    def is_occupied(self):
-        return self.occupied
-
 
 class Party(models.Model):
     name = models.CharField(max_length=200)
