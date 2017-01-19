@@ -4,4 +4,12 @@ from django.apps import AppConfig
 
 
 class QueueConfig(AppConfig):
-    name = 'queue'
+    name = 'unchain.queue'
+    verbose_name = "Queue"
+
+    def ready(self):
+        """Override this to put in:
+            Users system checks
+            Users signal registration
+        """
+        pass

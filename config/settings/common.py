@@ -47,6 +47,7 @@ LOCAL_APPS = (
     # custom users app
     'unchain.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'unchain.queue.apps.QueueConfig'
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
