@@ -16,6 +16,8 @@ class Table(models.Model):
         (EIGHT_SEATER, 'eight seater'),
     )
     capacity = models.IntegerField(choices=CAPACITY_CHOICES, default=TWO_SEATER)
+    # table number for easy identification
+    number = models.IntegerField()
     # use quotes to force a lazy reference
     # might want to consider switching to a one-to-one relation instead
     occupant = models.ForeignKey('Party', null=True, on_delete=models.SET_NULL)

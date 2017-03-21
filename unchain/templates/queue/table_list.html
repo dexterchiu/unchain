@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block title %}Tables{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Tables</h2>
+
+  <div class="list-group">
+    {% for table in table_list %}
+      <a href="{% url 'tables:detail' table.number %}" class="list-group-item">
+        <h4 class="list-group-item-heading">{{ table.number }}</h4>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
