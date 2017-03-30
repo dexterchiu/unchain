@@ -8,9 +8,9 @@
 
   <div class="list-group">
     {% for party in party_list %}
-      <!-- <a href=" url 'parties:detail' party.name %}" class="list-group-item"> -->
-      <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">Party of size {{ party.size }} under {{ party.name }}</h4>
+      <a href="{% url 'queue:party_detail' table.id %}" class="list-group-item">
+      <!-- <a href="#" class="list-group-item"> -->
+        <h4 class="list-group-item-heading">Party of size {{ party.size }} under {{ party.name }}</h4>
       </a>
     {% endfor %}
   </div>

@@ -5,15 +5,26 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'queue'
 urlpatterns = [
     url(
         regex=r'^parties/$',
         view=views.PartyListView.as_view(),
-        name='list'
+        name='party_list'
+    ),
+    url(
+        regex=r'^parties/(?P<pk>\d+)$',
+        view=views.PartyDetailView.as_view(),
+        name='party_detail'
     ),
     url(
         regex=r'^tables/$',
         view=views.TableListView.as_view(),
-        name='list'
+        name='table_list'
+    ),
+    url(
+        regex=r'^tables/(?P<pk>\d+)$',
+        view=views.TableDetailView.as_view(),
+        name='table_detail'
     ),
 ]
