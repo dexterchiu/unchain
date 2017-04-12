@@ -20,6 +20,26 @@ class Table(models.Model):
     # use quotes to force a lazy reference
     # might want to consider switching to a one-to-one relation instead
 
+    def fill_table(self):
+        '''
+        if table is filled, do nothing
+        if table is empty, select appropriate party and fill table
+        if table is empty and no appropriate party is available, do nothing
+        '''
+        try:
+            party = Party.objects.filter(
+                size__gte=self.capacity
+            ).filter(
+                seat__isnull=True
+            ).order_by(
+                'arrival_time'
+            )[0:1].get()
+            party.seat = self
+            party.save()
+
+        except ObjectDoesNotExist:
+            print('No suitable parties to fill table')
+
     def __str__(self):
         try:
             return str("Table {} of capacity {}, occupant: {}".format(
@@ -50,6 +70,13 @@ class Party(models.Model):
         if not self.id:
             self.arrival_time = timezone.now()
         return super(Party, self).save(*args, **kwargs)
+
+    def leave_table(self):
+        '''
+        sets seat to none, indicating the party has left the table
+        '''
+        self.seat = None
+        self.save()
 
     def __str__(self):
         return str("{}'s party of {}, arrived @ {}".format(self.name,

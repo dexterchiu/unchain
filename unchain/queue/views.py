@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 
 from .models import Party, Table
@@ -25,3 +26,13 @@ class TableListView(ListView):
 class TableDetailView(DetailView):
     model = Table
     template_name = 'queue/table_detail.html'
+
+
+def party_leave(request, party_id):
+    party = get_object_or_404(Party, party_id)
+    party.leave_table()
+
+
+def fill_table(request, table_id):
+    table = get_object_or_404(Table, table_id)
+    table.fill_table()
