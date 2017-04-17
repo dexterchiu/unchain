@@ -1,1 +1,20 @@
-<h1>{{ table.id }}</h1>
+{% extends "base.html" %}
+{% load static i18n %}
+{% block title %}Table{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Table #{{ table.id }}</h1>
+
+  <div class="row">
+  	<div class="col-md-2">Capacity</div>
+  	<div class="col-md-1">{{ table.capacity }}</div>
+  </div>
+  <div class="row">
+  	<div class="col-md-2">Party</div>
+  	<div class="col-md-8">{{ table.party }}</div>
+  </div>
+</div>
+{% endblock content %}
+
+
