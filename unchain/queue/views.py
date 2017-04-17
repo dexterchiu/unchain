@@ -3,6 +3,11 @@ from django.views.generic import DetailView, ListView
 
 from .models import Party, Table
 
+from django.shortcuts import render_to_response, render
+from django.template import RequestContext, Context, loader
+from django.http import HttpResponse
+from django.core.files import File
+
 # Create your views here.
 
 

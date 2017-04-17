@@ -1,1 +1,30 @@
-<h1>{{ party.id }}</h1>
+{% extends "base.html" %}
+{% load static i18n %}
+{% block title %}Table{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Party of size {{ party.size }} under {{ party.name }}</h1>
+
+  <div class="row">
+  	<div class="col-md-2">Name</div>
+  	<div class="col-md-1">{{ party.name }}</div>
+  </div>
+  <div class="row">
+  	<div class="col-md-2">Size</div>
+  	<div class="col-md-1">{{ party.size }}</div>
+  </div>
+  <div class="row">
+  	<div class="col-md-2">Arrival time</div>
+  	<div class="col-md-8">{{ party.arrival_time }}</div>
+  </div>
+  <div class="row">
+  	<div class="col-md-2">Table seated</div>
+  	<div class="col-md-8">{{ party.seat }}</div>
+  </div>
+  <button onclick="" type="button" class="btn btn-primary btn-sm btn-block">Leave table</button>
+
+</div>
+{% endblock content %}
+
+
