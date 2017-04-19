@@ -27,15 +27,18 @@ class Table(models.Model):
         if table is empty and no appropriate party is available, do nothing
         '''
         try:
-            party = Party.objects.filter(
-                size__gte=self.capacity
-            ).filter(
-                seat__isnull=True
-            ).order_by(
-                'arrival_time'
-            )[0:1].get()
-            party.seat = self
-            party.save()
+            if hasattr(self, 'party'):
+                print('Table already filled, fill another table.')
+            else:
+                party = Party.objects.filter(
+                    size__lte=self.capacity
+                ).filter(
+                    seat__isnull=True
+                ).order_by(
+                    'arrival_time'
+                )[0:1].get()
+                party.seat = self
+                party.save()
 
         except ObjectDoesNotExist:
             print('No suitable parties to fill table')
