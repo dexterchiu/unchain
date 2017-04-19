@@ -4,20 +4,20 @@
 
 {% block content %}
 <div class="container">
-  <h1>Table {{ table.id }}</h1>
+    <h1>Table {{ table.id }}</h1>
 
-  <div class="row">
-  	<div class="col-md-2">Capacity</div>
-  	<div class="col-md-1">{{ table.capacity }}</div>
-  </div>
-  <div class="row">
-  	<div class="col-md-2">Party</div>
-  	<div class="col-md-8">{{ table.party }}</div>
-  </div>
-  <button onclick="" type="button" class="btn btn-primary btn-sm btn-block">Fill table</button>
-  <!--<form action="#" method="get">
- 	<input type="button" class="btn btn-primary btn-sm btn-block" value="Fill table" name="fill_table_btn">
-  </form>-->
+    <div class="row">
+        <div class="col-md-2">Capacity</div>
+        <div class="col-md-1">{{ table.capacity }}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Party</div>
+        <div class="col-md-8">{{ table.party }}</div>
+    </div>
+    <form action="{% url 'queue:fill_table' table.id %}" method="post">
+    {% csrf_token %}
+        <input type="submit" class="btn btn-primary btn-sm btn-block" value="Fill table" name="fill_table_btn">
+    </form>
 </div>
 {% endblock content %}
 

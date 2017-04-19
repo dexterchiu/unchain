@@ -1,12 +1,10 @@
-from django.shortcuts import get_object_or_404
+from django.db import IntegrityError
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView, ListView
+from django.urls import reverse
 
 from .models import Party, Table
-
-from django.shortcuts import render_to_response, render
-from django.template import RequestContext, Context, loader
-from django.http import HttpResponse
-from django.core.files import File
 
 # Create your views here.
 
@@ -34,10 +32,32 @@ class TableDetailView(DetailView):
 
 
 def party_leave(request, party_id):
-    party = get_object_or_404(Party, party_id)
-    party.leave_table()
+    party = get_object_or_404(Party, pk=party_id)
+    try:
+        party.leave_table()
+    except IntegrityError:
+        return render(request, 'queue/party_detail.html', {
+            'party': party,
+            'error_message': 'Error, party cannot leave due to database error'
+        })
+    else:
+        return HttpResponseRedirect(reverse(
+            'queue:party_detail',
+            args=(party.id,)
+        ))
 
 
 def fill_table(request, table_id):
-    table = get_object_or_404(Table, table_id)
-    table.fill_table()
+    table = get_object_or_404(Table, pk=table_id)
+    try:
+        table.fill_table()
+    except IntegrityError:
+        return render(request, 'queue/table_detail.html', {
+            'table': table,
+            'error_message': 'Error, table cannot be filled due to database error'
+        })
+    else:
+        return HttpResponseRedirect(reverse(
+            'queue:table_detail',
+            args=(table.id,)
+        ))

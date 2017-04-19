@@ -18,6 +18,11 @@ urlpatterns = [
         name='party_detail'
     ),
     url(
+        regex=r'^parties/leave/(?P<party_id>\d+)$',
+        view=views.party_leave,
+        name='party_leave'
+    ),
+    url(
         regex=r'^tables/$',
         view=views.TableListView.as_view(),
         name='table_list'
@@ -26,5 +31,10 @@ urlpatterns = [
         regex=r'^tables/(?P<pk>\d+)$',
         view=views.TableDetailView.as_view(),
         name='table_detail'
+    ),
+    url(
+        regex=r'^tables/fill/(?P<table_id>\d+)$',
+        view=views.fill_table,
+        name='fill_table'
     ),
 ]
