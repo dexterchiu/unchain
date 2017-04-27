@@ -10,7 +10,8 @@
     {% for party in party_list %}
       <a href="{% url 'queue:party_detail' party.id %}" class="list-group-item">
       <!-- <a href="#" class="list-group-item"> -->
-        <h4 class="list-group-item-heading">Party of size {{ party.size }} under {{ party.name }}</h4>
+        Party of size {{ party.size }} under {{ party.name }}
+        <a href="{% url 'queue:party_leave' party.id %}" class="btn btn-danger">leave</a>
       </a>
     {% endfor %}
   </div>

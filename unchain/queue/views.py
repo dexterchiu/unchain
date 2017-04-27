@@ -42,8 +42,7 @@ def party_leave(request, party_id):
         })
     else:
         return HttpResponseRedirect(reverse(
-            'queue:party_detail',
-            args=(party.id,)
+            'queue:party_list',
         ))
 
 
