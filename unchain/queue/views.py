@@ -35,6 +35,7 @@ def party_leave(request, party_id):
     party = get_object_or_404(Party, pk=party_id)
     try:
         party.leave_table()
+        party.delete()
     except IntegrityError:
         return render(request, 'queue/party_detail.html', {
             'party': party,
